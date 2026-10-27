@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salt & Dehydration — Interactive Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Interactive science demo</p>
+      <h1>Why salt sucks the water out of you</h1>
+      <p class="lede">
+        Salt doesn’t “dry you out” like a sponge. It creates a concentration gradient —
+        and water moves to balance it. Watch osmosis pull H₂O out of a living cell.
+      </p>
+    </header>
+
+    <section class="demo-panel" aria-labelledby="demo-heading">
+      <div class="demo-header">
+        <h2 id="demo-heading">Live cell demo</h2>
+        <p class="demo-sub">Drag the salt slider. Water will leave the cell to dilute the salty outside.</p>
+      </div>
+
+      <div class="demo-stage">
+        <div class="canvas-wrap">
+          <canvas id="cellCanvas" width="640" height="420" role="img" aria-label="Animation of a cell losing water as salt concentration rises"></canvas>
+          <div class="canvas-labels">
+            <span class="label-in">Inside cell</span>
+            <span class="label-out">Outside fluid</span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-block">
+            <div class="control-top">
+              <label for="saltSlider">Outside salt concentration</label>
+              <span class="value-pill" id="saltValue">normal</span>
+            </div>
+            <input
+              type="range"
+              id="saltSlider"
+              min="0"
+              max="100"
+              value="20"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="20"
+            />
+            <div class="slider-ends">
+              <span>Fresh / balanced</span>
+              <span>Very salty</span>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat">
+              <span class="stat-label">Cell volume</span>
+              <strong id="volumeStat">100%</strong>
+              <div class="bar"><div class="bar-fill volume" id="volumeBar"></div></div>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Outside salt</span>
+              <strong id="saltStat">0.9%</strong>
+              <div class="bar"><div class="bar-fill salt" id="saltBar"></div></div>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Water leaving</span>
+              <strong id="flowStat">≈ 0</strong>
+              <div class="bar"><div class="bar-fill flow" id="flowBar"></div></div>
+            </div>
+            <div class="stat status-stat">
+              <span class="stat-label">Cell state</span>
+              <strong id="stateStat">Isotonic — balanced</strong>
+              <p class="state-hint" id="stateHint">Water moves in and out at the same rate.</p>
+            </div>
+          </div>
+
+          <div class="preset-row">
+            <button type="button" class="preset" data-salt="10">Blood-like</button>
+            <button type="button" class="preset" data-salt="45">Salty snack</button>
+            <button type="button" class="preset" data-salt="75">Ocean water</button>
+            <button type="button" class="preset" data-salt="95">Hyper-salty</button>
+            <button type="button" class="preset ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explain" aria-labelledby="why-heading">
+      <h2 id="why-heading">How salt “sucks” water</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card-num">01</div>
+          <h3>Water follows salt</h3>
+          <p>
+            Membranes are semi-permeable: water slips through easily; salt ions (Na⁺ / Cl⁻)
+            do not. When the outside is saltier than the inside, water flows <em>out</em>
+            to dilute the salt. That’s osmosis — not suction, but pure physics.
+          </p>
+        </article>
+        <article class="card">
+          <div class="card-num">02</div>
+          <h3>Cells shrink</h3>
+          <p>
+            As water leaves, the cell volume drops (crenation in animal cells).
+            In your body, cells in the gut, blood, and tissues all feel this gradient
+            after a high-salt meal.
+          </p>
+        </article>
+        <article class="card">
+          <div class="card-num">03</div>
+          <h3>You feel thirsty</h3>
+          <p>
+            Your brain senses rising blood osmolarity and triggers thirst.
+            Kidneys also hold onto water and dump excess sodium — both are repair modes
+            for a salt-heavy load.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="why-dehydrating" aria-labelledby="dehydrate-heading">
+      <div class="why-copy">
+        <h2 id="dehydrate-heading">Why eating salt is dehydrating</h2>
+        <p>
+          “Dehydrating” here doesn’t mean salt magically destroys water molecules.
+          It means <strong>your free water is redistributed and then lost</strong>
+          until you rebalance.
+        </p>
+        <ol class="steps">
+          <li>
+            <strong>Salt enters the bloodstream</strong> (from food or drink).
+            Plasma sodium and osmolarity rise.
+          </li>
+          <li>
+            <strong>Water is pulled from cells</strong> into the blood and extracellular
+            fluid to dilute the salt — same idea as the demo above.
+          </li>
+          <li>
+            <strong>You get thirsty and pee more sodium</strong> over time.
+            Until you drink enough plain water (and your kidneys catch up),
+            net body water can drop relative to need — classic “dry mouth after chips” feeling.
+          </li>
+        </ol>
+        <p class="note">
+          Sea water is worse: it’s so salty that your body spends more water dumping the salt
+          than it gains from the drink. That’s why drinking ocean water dehydrates you further.
+        </p>
+      </div>
+      <aside class="formula-card" aria-label="Simple osmosis idea">
+        <p class="formula-label">In one line</p>
+        <p class="formula">
+          High salt outside → water leaves cells → thirst &amp; fluid shift
+        </p>
+        <div class="mini-diagram" id="miniDiagram" aria-hidden="true">
+          <div class="mini-cell" id="miniCell">
+            <span>H₂O</span>
+          </div>
+          <div class="arrows" id="miniArrows">↔</div>
+          <div class="mini-salt">
+            <span>Na⁺ Cl⁻</span>
+            <span class="mini-salt-sub">salty outside</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="compare" aria-labelledby="compare-heading">
+      <h2 id="compare-heading">Three fluid worlds</h2>
+      <div class="compare-grid">
+        <button type="button" class="compare-card" data-mode="hypo">
+          <h3>Hypotonic</h3>
+          <p class="compare-tag">Less salt outside</p>
+          <p>Water rushes <strong>in</strong>. Cell swells (can even burst).</p>
+        </button>
+        <button type="button" class="compare-card active" data-mode="iso">
+          <h3>Isotonic</h3>
+          <p class="compare-tag">Balanced</p>
+          <p>Equal salt. Net water flow ≈ zero. Healthy resting state.</p>
+        </button>
+        <button type="button" class="compare-card" data-mode="hyper">
+          <h3>Hypertonic</h3>
+          <p class="compare-tag">More salt outside</p>
+          <p>Water rushes <strong>out</strong>. Cell shrinks. Salty-food mode.</p>
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Demo only — simplified biology for intuition. Real body salt balance involves
+        hormones (ADH, aldosterone), kidneys, and diet. Stay curious; drink water with the chips.
+      </p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
